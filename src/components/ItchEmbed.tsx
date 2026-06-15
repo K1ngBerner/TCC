@@ -10,7 +10,7 @@ type Props = {
 
 export function ItchEmbed({ content }: Props) {
   return (
-    <section id="jogar" className="section section-anchor">
+    <section id="jogar" className="section section-anchor section--warm-glow">
       <div className="section-heading">
         <h2>{content.itch.title}</h2>
         <p>{content.itch.description}</p>
@@ -21,15 +21,17 @@ export function ItchEmbed({ content }: Props) {
           src={ITCH_EMBED}
           width="552"
           height="167"
-          title="Sussuros do Folclore on itch.io"
+          title="Sussurros do Folclore on itch.io"
           loading="lazy"
         >
-          <a href={ITCH_URL}>Sussuros do Folclore by Berner.Dev, Ika-Rus, amayorirpg, tanalexandre, Tamir Lins</a>
+          <a href={ITCH_URL}>Sussurros do Folclore by Berner.Dev, Ika-Rus, amayorirpg, tanalexandre, Tamir Lins</a>
         </iframe>
       </div>
-      <a className="button" href={ITCH_URL} target="_blank" rel="noreferrer">
-        {content.itch.fallbackLabel}
-      </a>
+      <div className="embed-actions">
+        <a className="button" href={ITCH_URL} target="_blank" rel="noreferrer">
+          {content.itch.fallbackLabel}
+        </a>
+      </div>
     </section>
   );
 }

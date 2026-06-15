@@ -6,7 +6,7 @@ type Props = {
 
 export function CreditsSection({ content }: Props) {
   return (
-    <section className="section credits-section">
+    <section id="creditos" className="section section-anchor section--compact credits-section">
       <div className="section-heading compact">
         <h2>{content.credits.title}</h2>
         <p>{content.credits.intro}</p>

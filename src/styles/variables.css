@@ -18,6 +18,9 @@
   --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.28);
   --shadow-small: 0 12px 28px rgba(0, 0, 0, 0.22);
   --radius: 8px;
-  --header-height: 74px;
+  --header-height: 68px;
+  --space-section: clamp(4rem, 6vw, 5.5rem);
+  --space-section-compact: clamp(2.75rem, 4vw, 4rem);
+  --space-content: clamp(1.5rem, 3vw, 2.5rem);
   color-scheme: dark;
 }

@@ -6,12 +6,12 @@ type Props = {
 
 export function ProjectConcept({ content }: Props) {
   return (
-    <section id="conceito" className="section section-anchor">
+    <section id="conceito" className="section section-anchor section--compact">
       <div className="section-heading">
         <h2>{content.concept.title}</h2>
         <p>{content.concept.intro}</p>
       </div>
-      <div className="info-grid">
+      <div className="info-grid container">
         {content.concept.stats.map((item) => (
           <article className="info-card" key={item.label}>
             <span>{item.label}</span>

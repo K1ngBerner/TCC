@@ -6,8 +6,8 @@ type Props = {
 
 export function ArtDirection({ content }: Props) {
   return (
-    <section className="section">
-      <div className="section-heading">
+    <section className="section section--cold-glow">
+      <div className="section-heading section-heading--left container">
         <h2>{content.art.title}</h2>
         <p>{content.art.intro}</p>
       </div>

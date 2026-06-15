@@ -1,4 +1,5 @@
 import type { Language, LocaleContent } from "../locales/types";
+import { CreatorCredit } from "./CreatorCredit";
 import { LanguageToggle } from "./LanguageToggle";
 
 type Props = {
@@ -10,18 +11,34 @@ type Props = {
 export function Footer({ content, language, onLanguageChange }: Props) {
   return (
     <footer className="site-footer">
-      <img src="/assets/logo/sussurros-logo.png" alt="Sussurros do Folclore" />
-      <p>{content.footer.text}</p>
-      <p>{content.footer.academicNotice}</p>
-      <div className="footer-links">
-        <a href="https://reine-berner.itch.io/sussuros-do-folclore" target="_blank" rel="noreferrer">
-          itch.io
-        </a>
-        <a href="https://miro.com/app/board/uXjVG1FYrG8=/" target="_blank" rel="noreferrer">
-          Miro
-        </a>
+      <div className="footer-grid">
+        <div className="footer-project">
+          <img src="/assets/logo/sussurros-logo.png" alt="Sussurros do Folclore" />
+          <h2>{content.footer.projectTitle}</h2>
+          <p>{content.footer.text}</p>
+          <p>{content.footer.academicNotice}</p>
+        </div>
+
+        <nav className="footer-nav" aria-label={content.footer.navigationTitle}>
+          <h2>{content.footer.navigationTitle}</h2>
+          {content.footer.links.map((link) => (
+            <a
+              key={`${link.href}-${link.label}`}
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noreferrer" : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="footer-creator">
+          <h2>{content.footer.creatorTitle}</h2>
+          <CreatorCredit content={content} />
+          <LanguageToggle language={language} label={content.common.languageLabel} onChange={onLanguageChange} />
+        </div>
       </div>
-      <LanguageToggle language={language} label={content.common.languageLabel} onChange={onLanguageChange} />
     </footer>
   );
 }

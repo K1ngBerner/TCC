@@ -6,8 +6,8 @@ type Props = {
 
 export function ResearchSection({ content }: Props) {
   return (
-    <section id="pesquisa" className="section section-anchor band">
-      <div className="section-heading">
+    <section id="pesquisa" className="section section-anchor band section--warm-glow">
+      <div className="section-heading section-heading--left container">
         <h2>{content.research.title}</h2>
         <p>{content.research.intro}</p>
       </div>

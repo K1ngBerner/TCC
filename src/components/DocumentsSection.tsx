@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { LocaleContent } from "../locales/types";
 
 type Props = {
@@ -6,12 +6,31 @@ type Props = {
 };
 
 export function DocumentsSection({ content }: Props) {
-  const initial = useMemo(() => content.documents.documents[0]?.primaryHref ?? "", [content]);
-  const [selected, setSelected] = useState(initial);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
-    setSelected(initial);
-  }, [initial]);
+    setSelected(null);
+  }, [content]);
+
+  useEffect(() => {
+    if (!selected) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelected(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.classList.add("modal-open");
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.classList.remove("modal-open");
+    };
+  }, [selected]);
 
   const selectedTitle =
     content.documents.documents.find((doc) => doc.primaryHref === selected || doc.alternateHref === selected)?.title ??
@@ -19,7 +38,7 @@ export function DocumentsSection({ content }: Props) {
 
   return (
     <section id="documentos" className="section section-anchor">
-      <div className="section-heading">
+      <div className="section-heading section-heading--left container">
         <h2>{content.documents.title}</h2>
         <p>{content.documents.intro}</p>
       </div>
@@ -38,7 +57,7 @@ export function DocumentsSection({ content }: Props) {
               <h3>{doc.title}</h3>
               <p>{doc.description}</p>
               <div className="document-actions">
-                <button type="button" onClick={() => setSelected(doc.primaryHref)}>
+                <button type="button" onClick={() => setSelected(doc.primaryHref)} aria-haspopup="dialog">
                   {content.common.view}
                 </button>
                 <a href={doc.primaryHref} target="_blank" rel="noreferrer">
@@ -48,26 +67,40 @@ export function DocumentsSection({ content }: Props) {
                   {content.common.download}
                 </a>
               </div>
-              <button className="text-button" type="button" onClick={() => setSelected(doc.alternateHref)}>
+              <button className="text-button" type="button" onClick={() => setSelected(doc.alternateHref)} aria-haspopup="dialog">
                 {doc.alternateLabel}
               </button>
             </div>
           </article>
         ))}
       </div>
-      <div className="document-viewer">
-        <div className="viewer-header">
-          <h3>{content.documents.viewerTitle}</h3>
-          {selected ? (
-            <a href={selected} target="_blank" rel="noreferrer">
-              {selectedTitle}
-            </a>
-          ) : (
-            <span>{content.documents.choosePrompt}</span>
-          )}
+      {selected && (
+        <div
+          className="modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedTitle}
+          onClick={() => setSelected(null)}
+        >
+          <div className="document-modal" onClick={(event) => event.stopPropagation()}>
+            <div className="viewer-header">
+              <div>
+                <span>{content.documents.viewerTitle}</span>
+                <h3>{selectedTitle}</h3>
+              </div>
+              <div className="viewer-actions">
+                <a href={selected} target="_blank" rel="noreferrer">
+                  {content.common.openNewTab}
+                </a>
+                <button type="button" onClick={() => setSelected(null)}>
+                  {content.documents.closeViewer}
+                </button>
+              </div>
+            </div>
+            <iframe src={selected} title={selectedTitle} loading="lazy" />
+          </div>
         </div>
-        {selected && <iframe src={selected} title={selectedTitle} loading="lazy" />}
-      </div>
+      )}
     </section>
   );
 }

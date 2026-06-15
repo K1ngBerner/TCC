@@ -26,6 +26,12 @@ export type TeamMember = {
   roles: string[];
 };
 
+export type FooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
 export type LocaleContent = {
   lang: string;
   meta: {
@@ -37,6 +43,7 @@ export type LocaleContent = {
     playLabel: string;
     menuLabel: string;
     closeLabel: string;
+    ariaLabel: string;
   };
   common: {
     watchPitch: string;
@@ -45,7 +52,9 @@ export type LocaleContent = {
     openNewTab: string;
     download: string;
     view: string;
+    close: string;
     languageLabel: string;
+    skipLink: string;
   };
   hero: {
     kicker: string;
@@ -65,6 +74,13 @@ export type LocaleContent = {
     title: string;
     intro: string;
     stats: StatItem[];
+  };
+  gallery: {
+    title: string;
+    eyebrow: string;
+    intro: string;
+    openLabel: string;
+    captions: string[];
   };
   research: {
     title: string;
@@ -110,6 +126,7 @@ export type LocaleContent = {
     disclaimer: string;
     viewerTitle: string;
     choosePrompt: string;
+    closeViewer: string;
     documents: DocumentInfo[];
   };
   miro: {
@@ -134,8 +151,17 @@ export type LocaleContent = {
     externalAsset: StatItem[];
     soundCredit: string;
   };
+  creator: {
+    title: string;
+    subtitle: string;
+    logoAlt: string;
+  };
   footer: {
     text: string;
     academicNotice: string;
+    projectTitle: string;
+    navigationTitle: string;
+    creatorTitle: string;
+    links: FooterLink[];
   };
 };

@@ -9,7 +9,7 @@ type Props = {
 
 export function MiroEmbed({ content }: Props) {
   return (
-    <section id="miro" className="section section-anchor band">
+    <section id="miro" className="section section-anchor band section--cold-glow">
       <div className="section-heading">
         <h2>{content.miro.title}</h2>
         <p>{content.miro.description}</p>
@@ -18,9 +18,11 @@ export function MiroEmbed({ content }: Props) {
         <iframe src={MIRO_EMBED_URL} title={content.miro.title} loading="lazy" allowFullScreen />
       </div>
       <p className="embed-fallback">{content.miro.fallback}</p>
-      <a className="button button-secondary" href={MIRO_URL} target="_blank" rel="noreferrer">
-        {content.miro.openLabel}
-      </a>
+      <div className="embed-actions">
+        <a className="button button-secondary" href={MIRO_URL} target="_blank" rel="noreferrer">
+          {content.miro.openLabel}
+        </a>
+      </div>
     </section>
   );
 }

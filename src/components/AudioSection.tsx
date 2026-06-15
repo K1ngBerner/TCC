@@ -6,7 +6,7 @@ type Props = {
 
 export function AudioSection({ content }: Props) {
   return (
-    <section className="section split-section audio-section">
+    <section className="section section--compact split-section audio-section">
       <div className="section-heading compact">
         <h2>{content.audio.title}</h2>
         <p>{content.audio.intro}</p>

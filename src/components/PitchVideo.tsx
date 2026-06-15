@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { LocaleContent } from "../locales/types";
+import { SectionOrnament } from "./SectionOrnament";
 
 type Props = {
   content: LocaleContent;
@@ -18,6 +19,7 @@ export function PitchVideo({ content }: Props) {
       <div className="section-heading">
         <p className="eyebrow">{content.pitch.eyebrow}</p>
         <h2>{content.pitch.title}</h2>
+        <SectionOrnament />
         <p>{content.pitch.description}</p>
       </div>
 

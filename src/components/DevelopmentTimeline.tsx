@@ -6,8 +6,8 @@ type Props = {
 
 export function DevelopmentTimeline({ content }: Props) {
   return (
-    <section id="desenvolvimento" className="section section-anchor band">
-      <div className="section-heading">
+    <section id="desenvolvimento" className="section section-anchor band section--warm-glow">
+      <div className="section-heading section-heading--left container">
         <h2>{content.development.title}</h2>
         <p>{content.development.intro}</p>
       </div>

@@ -31,7 +31,7 @@ export function Header({ content, language, onLanguageChange }: Props) {
         <span />
       </button>
 
-      <nav id="main-navigation" className={open ? "nav-links is-open" : "nav-links"} aria-label="Primary">
+      <nav id="main-navigation" className={open ? "nav-links is-open" : "nav-links"} aria-label={content.nav.ariaLabel}>
         {content.nav.items.map((item) => (
           <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
             {item.label}

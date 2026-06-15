@@ -9,19 +9,16 @@ export const pt: LocaleContent = {
   },
   nav: {
     items: [
-      { label: "Início", href: "#inicio" },
+      { label: "Projeto", href: "#conceito" },
       { label: "Pitch", href: "#pitch" },
-      { label: "Conceito", href: "#conceito" },
-      { label: "Pesquisa", href: "#pesquisa" },
-      { label: "Desenvolvimento", href: "#desenvolvimento" },
+      { label: "Processo", href: "#desenvolvimento" },
       { label: "Documentos", href: "#documentos" },
-      { label: "Miro", href: "#miro" },
       { label: "Jogar", href: "#jogar" },
-      { label: "Equipe", href: "#equipe" },
     ],
     playLabel: "Jogar",
     menuLabel: "Abrir menu",
     closeLabel: "Fechar menu",
+    ariaLabel: "Navegação principal",
   },
   common: {
     watchPitch: "Assistir ao pitch",
@@ -30,7 +27,9 @@ export const pt: LocaleContent = {
     openNewTab: "Abrir em nova aba",
     download: "Baixar",
     view: "Visualizar",
+    close: "Fechar",
     languageLabel: "Selecionar idioma",
+    skipLink: "Pular para o conteúdo principal",
   },
   hero: {
     kicker: "Projeto acadêmico de Design de Games",
@@ -62,6 +61,21 @@ export const pt: LocaleContent = {
       { label: "Duração", value: "15 a 25 minutos por sessão" },
       { label: "Plataforma", value: "PC Windows" },
       { label: "Engine", value: "Unity" },
+    ],
+  },
+  gallery: {
+    title: "Galeria de gameplay",
+    eyebrow: "Imagens do jogo",
+    intro:
+      "A galeria está preparada para receber screenshots reais do projeto, destacando a cozinha rural, a câmera isométrica, os props narrativos e os eventos ambientais.",
+    openLabel: "Ampliar screenshot",
+    captions: [
+      "Visão geral da cozinha rural",
+      "Exploração com câmera isométrica",
+      "Interação com props narrativos",
+      "Iluminação da lamparina",
+      "Manifestação do redemoinho",
+      "Elementos utilizados nos puzzles",
     ],
   },
   research: {
@@ -179,6 +193,7 @@ export const pt: LocaleContent = {
       "As traduções em inglês foram criadas exclusivamente para portfólio profissional. Em caso de divergência, os documentos originais em português devem ser considerados a versão autoritativa.",
     viewerTitle: "Visualizador",
     choosePrompt: "Escolha um documento para visualizar nesta página.",
+    closeViewer: "Fechar visualizador",
     documents: [
       {
         title: "Trabalho de Conclusão de Curso",
@@ -239,8 +254,26 @@ export const pt: LocaleContent = {
     soundCredit:
       "Os efeitos sonoros documentados foram obtidos a partir de conteúdos disponibilizados na Pixabay, com créditos detalhados nos documentos do projeto.",
   },
+  creator: {
+    title: "Design e desenvolvimento do portfólio por Reinhold Berner",
+    subtitle: "Game Design • UX • Frontend • Produção Multimídia",
+    logoAlt: "Logo profissional de Reinhold Berner",
+  },
   footer: {
     text: "Sussurros do Folclore. Projeto acadêmico desenvolvido para o curso de Design de Games da Universidade Anhembi Morumbi, 2026.",
     academicNotice: "Projeto acadêmico sem backend, pronto para deploy estático.",
+    projectTitle: "Projeto acadêmico",
+    navigationTitle: "Navegação",
+    creatorTitle: "Portfólio",
+    links: [
+      { label: "Pitch", href: "#pitch" },
+      { label: "Projeto", href: "#conceito" },
+      { label: "Processo", href: "#desenvolvimento" },
+      { label: "Documentos", href: "#documentos" },
+      { label: "Miro", href: "#miro" },
+      { label: "itch.io", href: "https://reine-berner.itch.io/sussuros-do-folclore", external: true },
+      { label: "Equipe", href: "#equipe" },
+      { label: "Créditos", href: "#creditos" },
+    ],
   },
 };

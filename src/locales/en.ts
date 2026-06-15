@@ -9,19 +9,16 @@ export const en: LocaleContent = {
   },
   nav: {
     items: [
-      { label: "Home", href: "#inicio" },
+      { label: "Project", href: "#conceito" },
       { label: "Pitch", href: "#pitch" },
-      { label: "Concept", href: "#conceito" },
-      { label: "Research", href: "#pesquisa" },
-      { label: "Development", href: "#desenvolvimento" },
+      { label: "Process", href: "#desenvolvimento" },
       { label: "Documents", href: "#documentos" },
-      { label: "Miro", href: "#miro" },
       { label: "Play", href: "#jogar" },
-      { label: "Team", href: "#equipe" },
     ],
     playLabel: "Play",
     menuLabel: "Open menu",
     closeLabel: "Close menu",
+    ariaLabel: "Primary navigation",
   },
   common: {
     watchPitch: "Watch the pitch",
@@ -30,7 +27,9 @@ export const en: LocaleContent = {
     openNewTab: "Open in new tab",
     download: "Download",
     view: "View",
+    close: "Close",
     languageLabel: "Select language",
+    skipLink: "Skip to main content",
   },
   hero: {
     kicker: "Academic Game Design project",
@@ -62,6 +61,21 @@ export const en: LocaleContent = {
       { label: "Duration", value: "15 to 25 minutes per session" },
       { label: "Platform", value: "PC Windows" },
       { label: "Engine", value: "Unity" },
+    ],
+  },
+  gallery: {
+    title: "Gameplay gallery",
+    eyebrow: "Game images",
+    intro:
+      "The gallery is ready to receive real project screenshots, highlighting the rural kitchen, isometric camera, narrative props and environmental events.",
+    openLabel: "Open screenshot",
+    captions: [
+      "Overview of the rural kitchen",
+      "Exploration with an isometric camera",
+      "Interaction with narrative props",
+      "Lamp lighting",
+      "Whirlwind manifestation",
+      "Elements used in puzzles",
     ],
   },
   research: {
@@ -179,6 +193,7 @@ export const en: LocaleContent = {
       "Professional Portfolio Translation. This English version was created exclusively for professional portfolio presentation and international accessibility. The project, research, design process, development, and original academic documentation were conceived and produced in Portuguese. In case of any discrepancy, the original Portuguese version should be considered the authoritative document.",
     viewerTitle: "Viewer",
     choosePrompt: "Choose a document to view on this page.",
+    closeViewer: "Close viewer",
     documents: [
       {
         title: "Written Final Paper",
@@ -239,8 +254,26 @@ export const en: LocaleContent = {
     soundCredit:
       "The documented sound effects were obtained from content available on Pixabay, with detailed credits in the project documents.",
   },
+  creator: {
+    title: "Portfolio design and development by Reinhold Berner",
+    subtitle: "Game Design • UX • Frontend • Multimedia Production",
+    logoAlt: "Reinhold Berner professional logo",
+  },
   footer: {
     text: "Sussurros do Folclore. Academic project developed for the Game Design program at Universidade Anhembi Morumbi, 2026.",
     academicNotice: "Static academic project with no backend, ready for deployment.",
+    projectTitle: "Academic project",
+    navigationTitle: "Navigation",
+    creatorTitle: "Portfolio",
+    links: [
+      { label: "Pitch", href: "#pitch" },
+      { label: "Project", href: "#conceito" },
+      { label: "Process", href: "#desenvolvimento" },
+      { label: "Documents", href: "#documentos" },
+      { label: "Miro", href: "#miro" },
+      { label: "itch.io", href: "https://reine-berner.itch.io/sussuros-do-folclore", external: true },
+      { label: "Team", href: "#equipe" },
+      { label: "Credits", href: "#creditos" },
+    ],
   },
 };

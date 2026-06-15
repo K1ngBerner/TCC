@@ -6,7 +6,7 @@ type Props = {
 
 export function PlayerExperience({ content }: Props) {
   return (
-    <section className="section split-section">
+    <section className="section section--compact split-section">
       <div className="section-heading compact">
         <h2>{content.experience.title}</h2>
         <p>{content.experience.intro}</p>

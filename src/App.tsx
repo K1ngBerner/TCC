@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { ArtDirection } from "./components/ArtDirection";
 import { AudioSection } from "./components/AudioSection";
 import { CreditsSection } from "./components/CreditsSection";
+import { CreatorCredit } from "./components/CreatorCredit";
 import { DevelopmentTimeline } from "./components/DevelopmentTimeline";
 import { DocumentsSection } from "./components/DocumentsSection";
 import { Footer } from "./components/Footer";
+import { GameGallery } from "./components/GameGallery";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { ItchEmbed } from "./components/ItchEmbed";
@@ -20,6 +22,7 @@ import { pt } from "./locales/pt";
 import type { Language } from "./locales/types";
 
 const STORAGE_KEY = "sussurros-language";
+const SITE_URL = "https://reine-berner.github.io/sussurros-do-folclore/";
 
 function getInitialLanguage(): Language {
   if (typeof window === "undefined") {
@@ -34,6 +37,19 @@ function App() {
   const content = useMemo(() => (language === "en" ? en : pt), [language]);
 
   useEffect(() => {
+    const upsertMeta = (selector: string, attribute: "content" | "href", value: string, create?: () => HTMLMetaElement | HTMLLinkElement) => {
+      const current = document.querySelector<HTMLMetaElement | HTMLLinkElement>(selector);
+      if (current) {
+        current.setAttribute(attribute, value);
+        return;
+      }
+      const next = create?.();
+      if (next) {
+        next.setAttribute(attribute, value);
+        document.head.appendChild(next);
+      }
+    };
+
     window.localStorage.setItem(STORAGE_KEY, language);
     document.documentElement.lang = content.lang;
     document.title = content.meta.title;
@@ -52,17 +68,54 @@ function App() {
     if (ogDescription) {
       ogDescription.content = content.meta.description;
     }
+
+    const ogImage = document.querySelector<HTMLMetaElement>('meta[property="og:image"]');
+    if (ogImage) {
+      ogImage.content = "/assets/images/og-image-1200x630.png";
+    }
+
+    upsertMeta('meta[property="og:url"]', "content", SITE_URL, () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("property", "og:url");
+      return meta;
+    });
+    upsertMeta('meta[name="twitter:card"]', "content", "summary_large_image", () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("name", "twitter:card");
+      return meta;
+    });
+    upsertMeta('meta[name="twitter:title"]', "content", content.meta.title, () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("name", "twitter:title");
+      return meta;
+    });
+    upsertMeta('meta[name="twitter:description"]', "content", content.meta.description, () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("name", "twitter:description");
+      return meta;
+    });
+    upsertMeta('meta[name="twitter:image"]', "content", "/assets/images/og-image-1200x630.png", () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("name", "twitter:image");
+      return meta;
+    });
+    upsertMeta('link[rel="canonical"]', "href", SITE_URL, () => {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      return link;
+    });
   }, [content, language]);
 
   return (
     <>
-      <a className="skip-link" href="#inicio">
-        Sussurros do Folclore
+      <a className="skip-link" href="#main-content">
+        {content.common.skipLink}
       </a>
       <Header content={content} language={language} onLanguageChange={setLanguage} />
-      <main>
+      <main id="main-content">
         <Hero content={content} />
         <PitchVideo content={content} />
+        <GameGallery content={content} />
         <ProjectConcept content={content} />
         <ResearchSection content={content} />
         <NarrativeSection content={content} />
@@ -75,6 +128,11 @@ function App() {
         <ItchEmbed content={content} />
         <TeamSection content={content} />
         <CreditsSection content={content} />
+        <section className="section section--compact creator-section">
+          <div className="container">
+            <CreatorCredit content={content} compact />
+          </div>
+        </section>
       </main>
       <Footer content={content} language={language} onLanguageChange={setLanguage} />
     </>
