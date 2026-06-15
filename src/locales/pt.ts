@@ -46,8 +46,8 @@ export const pt: LocaleContent = {
     description:
       "O pitch apresenta a proposta acadêmica, a atmosfera do jogo e os principais argumentos de design por trás da experiência.",
     playLabel: "Reproduzir pitch",
-    durationPrefix: "Duração",
-    durationUnknown: "Carregando duração",
+    platformLabel: "YouTube",
+    openYouTubeLabel: "Abrir pitch no YouTube",
   },
   concept: {
     title: "Conceito do projeto",

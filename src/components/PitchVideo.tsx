@@ -1,50 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { LocaleContent } from "../locales/types";
 
 type Props = {
   content: LocaleContent;
 };
 
-function formatDuration(seconds: number) {
-  if (!Number.isFinite(seconds) || seconds <= 0) {
-    return "";
-  }
-  const minutes = Math.floor(seconds / 60);
-  const remaining = Math.round(seconds % 60)
-    .toString()
-    .padStart(2, "0");
-  return `${minutes}:${remaining}`;
-}
+const YOUTUBE_ID = "EGgUVjrqLt4";
+const YOUTUBE_URL = `https://www.youtube.com/watch?v=${YOUTUBE_ID}`;
+const YOUTUBE_EMBED_URL = `https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0&modestbranding=1`;
+const YOUTUBE_POSTER = `https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg`;
 
 export function PitchVideo({ content }: Props) {
   const [active, setActive] = useState(false);
-  const [duration, setDuration] = useState("");
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const startPlayback = async () => {
-    const video = videoRef.current;
-    if (!video) {
-      return;
-    }
-
-    video.muted = true;
-    await video.play().catch(() => undefined);
-  };
-
-  useEffect(() => {
-    if (!active) {
-      return;
-    }
-
-    window.requestAnimationFrame(() => {
-      void startPlayback();
-    });
-  }, [active]);
-
-  const handlePlay = async () => {
-    setActive(true);
-    await startPlayback();
-  };
 
   return (
     <section id="pitch" className="section section-anchor">
@@ -55,26 +22,34 @@ export function PitchVideo({ content }: Props) {
       </div>
 
       <div className={active ? "video-shell is-active" : "video-shell"}>
-        <video
-          ref={videoRef}
-          src="/assets/video/pitch.mp4"
-          poster="/assets/logo/sussurros-logo.png"
-          controls={active}
-          autoPlay={active}
-          preload="metadata"
-          playsInline
-          onLoadedMetadata={(event) => setDuration(formatDuration(event.currentTarget.duration))}
-        />
-        {!active && (
-          <button className="video-overlay" type="button" onClick={handlePlay} aria-label={content.pitch.playLabel}>
-            <span className="play-symbol" aria-hidden="true" />
-            <span>{content.pitch.playLabel}</span>
-            <small>
-              {content.pitch.durationPrefix}: {duration || content.pitch.durationUnknown}
-            </small>
-          </button>
+        {active ? (
+          <iframe
+            src={YOUTUBE_EMBED_URL}
+            title={content.pitch.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            <img className="youtube-poster" src={YOUTUBE_POSTER} alt="" loading="lazy" />
+            <button
+              className="video-overlay"
+              type="button"
+              onClick={() => setActive(true)}
+              aria-label={content.pitch.playLabel}
+            >
+              <span className="play-symbol" aria-hidden="true" />
+              <span>{content.pitch.playLabel}</span>
+              <small>{content.pitch.platformLabel}</small>
+            </button>
+          </>
         )}
       </div>
+      <p className="video-fallback">
+        <a href={YOUTUBE_URL} target="_blank" rel="noreferrer">
+          {content.pitch.openYouTubeLabel}
+        </a>
+      </p>
     </section>
   );
 }

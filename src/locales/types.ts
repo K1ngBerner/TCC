@@ -58,8 +58,8 @@ export type LocaleContent = {
     eyebrow: string;
     description: string;
     playLabel: string;
-    durationPrefix: string;
-    durationUnknown: string;
+    platformLabel: string;
+    openYouTubeLabel: string;
   };
   concept: {
     title: string;

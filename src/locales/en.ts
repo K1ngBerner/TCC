@@ -46,8 +46,8 @@ export const en: LocaleContent = {
     description:
       "The pitch introduces the academic proposal, the atmosphere of the game and the main design arguments behind the experience.",
     playLabel: "Play pitch",
-    durationPrefix: "Duration",
-    durationUnknown: "Loading duration",
+    platformLabel: "YouTube",
+    openYouTubeLabel: "Open pitch on YouTube",
   },
   concept: {
     title: "Project concept",

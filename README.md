@@ -34,11 +34,11 @@ Os arquivos finais são gerados em `dist/`.
 ## Arquivos anexados utilizados
 
 - Logo oficial: `public/assets/logo/sussurros-logo.png`
-- Pitch em vídeo: `public/assets/video/pitch.mp4`
-- TCC original em português: `public/assets/docs/pt/TCC_parte_escrita.pdf`
-- GDD original em português: `public/assets/docs/pt/GDD_Sussurros.pdf`
-- TCC em inglês para portfólio: `public/assets/docs/en/TCC_Written_EN.pdf`
-- GDD em inglês para portfólio: `public/assets/docs/en/GDD_Sussurros_EN.pdf`
+- Pitch em vídeo: `https://www.youtube.com/watch?v=EGgUVjrqLt4`
+- TCC em português, cópia web otimizada: `public/assets/docs/pt/TCC_parte_escrita.pdf`
+- GDD em português, cópia web otimizada: `public/assets/docs/pt/GDD_Sussurros.pdf`
+- TCC em inglês para portfólio, cópia web otimizada: `public/assets/docs/en/TCC_Written_EN.pdf`
+- GDD em inglês para portfólio, cópia web otimizada: `public/assets/docs/en/GDD_Sussurros_EN.pdf`
 
 ## Integrações
 
@@ -49,5 +49,6 @@ Os arquivos finais são gerados em `dist/`.
 ## Limitações técnicas
 
 - As versões em inglês dos PDFs são traduções de portfólio geradas a partir do texto extraível dos PDFs originais, com imagens extraídas e reinseridas em ordem de página quando possível. Os PDFs originais em português permanecem como documentos acadêmicos autoritativos.
+- Os PDFs dentro de `public/assets/docs` foram otimizados para web e limite de upload do GitHub. Eles preservam a leitura visual, mas ficam rasterizados e podem não permitir seleção/pesquisa de texto. Os arquivos originais pesados não foram alterados fora do projeto.
 - O embed do Miro pode ser bloqueado por políticas do próprio Miro ou do navegador; a seção inclui fallback textual e botão para abrir o board.
-- O pitch inicia após clique em modo silenciado para respeitar políticas modernas de autoplay; os controles nativos ficam visíveis para ativar áudio.
+- O pitch é carregado por embed do YouTube apenas após o clique, evitando versionar arquivo de vídeo pesado no repositório.

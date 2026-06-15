@@ -376,16 +376,20 @@ h3 {
   aspect-ratio: 16 / 9;
 }
 
-.video-shell video {
+.video-shell video,
+.video-shell iframe,
+.youtube-poster {
   width: 100%;
   height: 100%;
   object-fit: contain;
   background: #000;
+  border: 0;
 }
 
-.video-shell:not(.is-active) video {
+.video-shell:not(.is-active) .youtube-poster {
   opacity: 0.68;
   filter: saturate(0.75);
+  object-fit: cover;
 }
 
 .video-overlay {
@@ -428,6 +432,12 @@ h3 {
 
 .video-overlay small {
   color: var(--aged-beige);
+}
+
+.video-fallback {
+  width: min(1040px, 100%);
+  margin: 0.8rem auto 0;
+  text-align: center;
 }
 
 .info-grid,
