@@ -14,7 +14,7 @@ export function MiroEmbed({ content }: Props) {
         <h2>{content.miro.title}</h2>
         <p>{content.miro.description}</p>
       </div>
-      <div className="embed-frame tall">
+      <div className="embed-frame tall miro-frame">
         <iframe src={MIRO_EMBED_URL} title={content.miro.title} loading="lazy" allowFullScreen />
       </div>
       <p className="embed-fallback">{content.miro.fallback}</p>

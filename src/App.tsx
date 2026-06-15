@@ -17,12 +17,14 @@ import { PlayerExperience } from "./components/PlayerExperience";
 import { ProjectConcept } from "./components/ProjectConcept";
 import { ResearchSection } from "./components/ResearchSection";
 import { TeamSection } from "./components/TeamSection";
+import { useAmbientWind } from "./hooks/useAmbientWind";
 import { en } from "./locales/en";
 import { pt } from "./locales/pt";
 import type { Language } from "./locales/types";
 
 const STORAGE_KEY = "sussurros-language";
-const SITE_URL = "https://reine-berner.github.io/sussurros-do-folclore/";
+const SITE_URL = "https://sussurosdofolclore.netlify.app/";
+const OG_IMAGE = "/assets/images/og-image.png";
 
 function getInitialLanguage(): Language {
   if (typeof window === "undefined") {
@@ -35,6 +37,7 @@ function getInitialLanguage(): Language {
 function App() {
   const [language, setLanguage] = useState<Language>(getInitialLanguage);
   const content = useMemo(() => (language === "en" ? en : pt), [language]);
+  const { enabled: soundEnabled, burstActive, toggleSound, playWindBurst } = useAmbientWind();
 
   useEffect(() => {
     const upsertMeta = (selector: string, attribute: "content" | "href", value: string, create?: () => HTMLMetaElement | HTMLLinkElement) => {
@@ -71,7 +74,7 @@ function App() {
 
     const ogImage = document.querySelector<HTMLMetaElement>('meta[property="og:image"]');
     if (ogImage) {
-      ogImage.content = "/assets/images/og-image-1200x630.png";
+      ogImage.content = OG_IMAGE;
     }
 
     upsertMeta('meta[property="og:url"]', "content", SITE_URL, () => {
@@ -94,7 +97,7 @@ function App() {
       meta.setAttribute("name", "twitter:description");
       return meta;
     });
-    upsertMeta('meta[name="twitter:image"]', "content", "/assets/images/og-image-1200x630.png", () => {
+    upsertMeta('meta[name="twitter:image"]', "content", OG_IMAGE, () => {
       const meta = document.createElement("meta");
       meta.setAttribute("name", "twitter:image");
       return meta;
@@ -111,9 +114,15 @@ function App() {
       <a className="skip-link" href="#main-content">
         {content.common.skipLink}
       </a>
-      <Header content={content} language={language} onLanguageChange={setLanguage} />
+      <Header
+        content={content}
+        language={language}
+        onLanguageChange={setLanguage}
+        soundEnabled={soundEnabled}
+        onSoundToggle={toggleSound}
+      />
       <main id="main-content">
-        <Hero content={content} />
+        <Hero content={content} windActive={burstActive} soundEnabled={soundEnabled} onWindGesture={playWindBurst} />
         <PitchVideo content={content} />
         <GameGallery content={content} />
         <ProjectConcept content={content} />
@@ -134,7 +143,7 @@ function App() {
           </div>
         </section>
       </main>
-      <Footer content={content} language={language} onLanguageChange={setLanguage} />
+      <Footer content={content} />
     </>
   );
 }

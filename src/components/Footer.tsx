@@ -1,14 +1,12 @@
-import type { Language, LocaleContent } from "../locales/types";
-import { CreatorCredit } from "./CreatorCredit";
-import { LanguageToggle } from "./LanguageToggle";
+import type { LocaleContent } from "../locales/types";
 
 type Props = {
   content: LocaleContent;
-  language: Language;
-  onLanguageChange: (language: Language) => void;
 };
 
-export function Footer({ content, language, onLanguageChange }: Props) {
+const CREATOR_URL = "https://k1ngberner.github.io/produ-o-portfolio/";
+
+export function Footer({ content }: Props) {
   return (
     <footer className="site-footer">
       <div className="footer-grid">
@@ -35,8 +33,16 @@ export function Footer({ content, language, onLanguageChange }: Props) {
 
         <div className="footer-creator">
           <h2>{content.footer.creatorTitle}</h2>
-          <CreatorCredit content={content} />
-          <LanguageToggle language={language} label={content.common.languageLabel} onChange={onLanguageChange} />
+          <a className="footer-creator-link" href={CREATOR_URL} target="_blank" rel="noopener noreferrer">
+            <img src="/assets/branding/reinhold-berner-logo.png" alt={content.creator.logoAlt} loading="lazy" />
+            <span>
+              <strong>Reinhold Berner</strong>
+              <small>{content.footer.creatorCredit}</small>
+            </span>
+          </a>
+          <a href={CREATOR_URL} target="_blank" rel="noopener noreferrer">
+            {content.footer.creatorLinkLabel}
+          </a>
         </div>
       </div>
     </footer>

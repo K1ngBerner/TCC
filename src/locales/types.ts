@@ -8,6 +8,7 @@ export type NavItem = {
 export type StatItem = {
   label: string;
   value: string;
+  description?: string;
 };
 
 export type DocumentInfo = {
@@ -24,6 +25,7 @@ export type DocumentInfo = {
 export type TeamMember = {
   name: string;
   roles: string[];
+  linkedin: string;
 };
 
 export type FooterLink = {
@@ -55,6 +57,12 @@ export type LocaleContent = {
     close: string;
     languageLabel: string;
     skipLink: string;
+  };
+  sound: {
+    enableLabel: string;
+    disableLabel: string;
+    enabledLabel: string;
+    disabledLabel: string;
   };
   hero: {
     kicker: string;
@@ -118,6 +126,8 @@ export type LocaleContent = {
     title: string;
     intro: string;
     sounds: string[];
+    listenWhirlwind: string;
+    stopWhirlwind: string;
   };
   documents: {
     title: string;
@@ -139,10 +149,16 @@ export type LocaleContent = {
     title: string;
     description: string;
     fallbackLabel: string;
+    downloadTitle: string;
+    downloadSteps: string[];
+    warning: string;
+    controlsTitle: string;
+    controls: StatItem[];
   };
   team: {
     title: string;
     intro: string;
+    linkedinLabel: string;
     members: TeamMember[];
   };
   credits: {
@@ -162,6 +178,8 @@ export type LocaleContent = {
     projectTitle: string;
     navigationTitle: string;
     creatorTitle: string;
+    creatorCredit: string;
+    creatorLinkLabel: string;
     links: FooterLink[];
   };
 };

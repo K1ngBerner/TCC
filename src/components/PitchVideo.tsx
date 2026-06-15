@@ -9,10 +9,17 @@ type Props = {
 const YOUTUBE_ID = "EGgUVjrqLt4";
 const YOUTUBE_URL = `https://www.youtube.com/watch?v=${YOUTUBE_ID}`;
 const YOUTUBE_EMBED_URL = `https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0&modestbranding=1`;
-const YOUTUBE_POSTER = `https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg`;
+const YOUTUBE_POSTER = `https://i.ytimg.com/vi/${YOUTUBE_ID}/maxresdefault.jpg`;
+const YOUTUBE_POSTER_FALLBACK = `https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg`;
 
 export function PitchVideo({ content }: Props) {
   const [active, setActive] = useState(false);
+  const [posterSrc, setPosterSrc] = useState(YOUTUBE_POSTER);
+  const handlePlay = () => {
+    window.dispatchEvent(new CustomEvent("sussurros:pause-audio"));
+    document.querySelectorAll("audio").forEach((audio) => audio.pause());
+    setActive(true);
+  };
 
   return (
     <section id="pitch" className="section section-anchor">
@@ -33,16 +40,24 @@ export function PitchVideo({ content }: Props) {
           />
         ) : (
           <>
-            <img className="youtube-poster" src={YOUTUBE_POSTER} alt="" loading="lazy" />
+            <img
+              className="youtube-poster"
+              src={posterSrc}
+              alt=""
+              loading="lazy"
+              onError={() => setPosterSrc(YOUTUBE_POSTER_FALLBACK)}
+            />
             <button
               className="video-overlay"
               type="button"
-              onClick={() => setActive(true)}
+              onClick={handlePlay}
               aria-label={content.pitch.playLabel}
             >
-              <span className="play-symbol" aria-hidden="true" />
-              <span>{content.pitch.playLabel}</span>
-              <small>{content.pitch.platformLabel}</small>
+              <span className="video-overlay-content">
+                <span className="play-symbol" aria-hidden="true" />
+                <span className="video-play-label">{content.pitch.playLabel}</span>
+                <small>{content.pitch.platformLabel}</small>
+              </span>
             </button>
           </>
         )}

@@ -26,6 +26,7 @@ export function ArtDirection({ content }: Props) {
                 <div>
                   <strong>{color.label}</strong>
                   <small>{color.value}</small>
+                  {color.description && <em>{color.description}</em>}
                 </div>
               </div>
             ))}

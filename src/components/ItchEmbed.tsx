@@ -32,6 +32,28 @@ export function ItchEmbed({ content }: Props) {
           {content.itch.fallbackLabel}
         </a>
       </div>
+      <div className="itch-guide">
+        <div>
+          <h3>{content.itch.downloadTitle}</h3>
+          <ol>
+            {content.itch.downloadSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+          <p>{content.itch.warning}</p>
+        </div>
+        <div>
+          <h3>{content.itch.controlsTitle}</h3>
+          <dl>
+            {content.itch.controls.map((control) => (
+              <div key={control.label}>
+                <dt>{control.label}</dt>
+                <dd>{control.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
     </section>
   );
 }
