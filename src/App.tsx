@@ -17,7 +17,7 @@ import { PlayerExperience } from "./components/PlayerExperience";
 import { ProjectConcept } from "./components/ProjectConcept";
 import { ResearchSection } from "./components/ResearchSection";
 import { TeamSection } from "./components/TeamSection";
-import { useAmbientWind } from "./hooks/useAmbientWind";
+import { useAmbientAudio } from "./context/AudioContext";
 import { en } from "./locales/en";
 import { pt } from "./locales/pt";
 import type { Language } from "./locales/types";
@@ -37,7 +37,7 @@ function getInitialLanguage(): Language {
 function App() {
   const [language, setLanguage] = useState<Language>(getInitialLanguage);
   const content = useMemo(() => (language === "en" ? en : pt), [language]);
-  const { enabled: soundEnabled, burstActive, toggleSound, playWindBurst } = useAmbientWind();
+  const { isAmbientEnabled, burstActive, toggleAmbient, playWindBurst } = useAmbientAudio();
 
   useEffect(() => {
     const upsertMeta = (selector: string, attribute: "content" | "href", value: string, create?: () => HTMLMetaElement | HTMLLinkElement) => {
@@ -118,11 +118,11 @@ function App() {
         content={content}
         language={language}
         onLanguageChange={setLanguage}
-        soundEnabled={soundEnabled}
-        onSoundToggle={toggleSound}
+        soundEnabled={isAmbientEnabled}
+        onSoundToggle={toggleAmbient}
       />
       <main id="main-content">
-        <Hero content={content} windActive={burstActive} soundEnabled={soundEnabled} onWindGesture={playWindBurst} />
+        <Hero content={content} windActive={burstActive} soundEnabled={isAmbientEnabled} onWindGesture={playWindBurst} />
         <PitchVideo content={content} />
         <GameGallery content={content} />
         <ProjectConcept content={content} />

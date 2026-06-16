@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import type { LocaleContent } from "../locales/types";
-import { SectionOrnament } from "./SectionOrnament";
 
 type Props = {
   content: LocaleContent;
@@ -10,15 +8,6 @@ type Props = {
 };
 
 export function Hero({ content, windActive = false, soundEnabled = false, onWindGesture }: Props) {
-  const [hasHeroImage, setHasHeroImage] = useState(false);
-
-  useEffect(() => {
-    const image = new Image();
-    image.onload = () => setHasHeroImage(true);
-    image.onerror = () => setHasHeroImage(false);
-    image.src = "/assets/images/gameplay/hero.webp";
-  }, []);
-
   return (
     <section id="inicio" className={windActive ? "hero section-anchor is-wind-active" : "hero section-anchor"}>
       <div className="hero-background" aria-hidden="true" />
@@ -39,26 +28,22 @@ export function Hero({ content, windActive = false, soundEnabled = false, onWind
           </div>
         </div>
 
-        <div className={hasHeroImage ? "hero-visual has-image" : "hero-visual"} aria-hidden="true">
-          <div className="hero-visual-frame">
-            {hasHeroImage ? (
+        <div className="hero-visual" aria-hidden="true">
+          <div className="hero-visual-frame hero-visual-panel">
+            <div className="hero-visual-fallback">
               <img
-                className="hero-visual-image"
-                src="/assets/images/gameplay/hero.webp"
+                className={windActive ? "hero-whirlwind is-audio-activating" : "hero-whirlwind"}
+                src="/assets/logo/saci-whirlwind.png"
                 alt=""
                 loading="eager"
                 decoding="async"
+                draggable={false}
               />
-            ) : (
-              <div className="hero-visual-fallback">
-                <SectionOrnament className="hero-visual-ornament" />
-                <span className="hero-wind-line hero-wind-line--one" />
-                <span className="hero-wind-line hero-wind-line--two" />
-                <span className="hero-wind-line hero-wind-line--three" />
-              </div>
-            )}
+              <span className="hero-wind-line hero-wind-line--one" />
+              <span className="hero-wind-line hero-wind-line--two" />
+              <span className="hero-wind-line hero-wind-line--three" />
+            </div>
           </div>
-          <SectionOrnament className="hero-wind-trace" />
         </div>
       </div>
       <a
