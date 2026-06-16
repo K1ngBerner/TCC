@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArtDirection } from "./components/ArtDirection";
 import { AudioSection } from "./components/AudioSection";
 import { CreditsSection } from "./components/CreditsSection";
@@ -36,8 +36,28 @@ function getInitialLanguage(): Language {
 
 function App() {
   const [language, setLanguage] = useState<Language>(getInitialLanguage);
+  const [heroActivationActive, setHeroActivationActive] = useState(false);
+  const heroActivationTimerRef = useRef<number | null>(null);
   const content = useMemo(() => (language === "en" ? en : pt), [language]);
   const { isAmbientEnabled, burstActive, toggleAmbient, playWindBurst } = useAmbientAudio();
+
+  const triggerHeroActivation = useCallback(() => {
+    setHeroActivationActive(true);
+    if (heroActivationTimerRef.current !== null) {
+      window.clearTimeout(heroActivationTimerRef.current);
+    }
+    heroActivationTimerRef.current = window.setTimeout(() => {
+      setHeroActivationActive(false);
+      heroActivationTimerRef.current = null;
+    }, 1400);
+  }, []);
+
+  const handleSoundToggle = useCallback(() => {
+    if (!isAmbientEnabled) {
+      triggerHeroActivation();
+    }
+    toggleAmbient();
+  }, [isAmbientEnabled, toggleAmbient, triggerHeroActivation]);
 
   useEffect(() => {
     const upsertMeta = (selector: string, attribute: "content" | "href", value: string, create?: () => HTMLMetaElement | HTMLLinkElement) => {
@@ -109,6 +129,14 @@ function App() {
     });
   }, [content, language]);
 
+  useEffect(() => {
+    return () => {
+      if (heroActivationTimerRef.current !== null) {
+        window.clearTimeout(heroActivationTimerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -119,10 +147,10 @@ function App() {
         language={language}
         onLanguageChange={setLanguage}
         soundEnabled={isAmbientEnabled}
-        onSoundToggle={toggleAmbient}
+        onSoundToggle={handleSoundToggle}
       />
       <main id="main-content">
-        <Hero content={content} windActive={burstActive} soundEnabled={isAmbientEnabled} onWindGesture={playWindBurst} />
+        <Hero content={content} windActive={burstActive || heroActivationActive} soundEnabled={isAmbientEnabled} onWindGesture={playWindBurst} />
         <PitchVideo content={content} />
         <GameGallery content={content} />
         <ProjectConcept content={content} />

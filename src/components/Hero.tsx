@@ -33,7 +33,7 @@ export function Hero({ content, windActive = false, soundEnabled = false, onWind
             <div className="hero-visual-fallback">
               <img
                 className={windActive ? "hero-whirlwind is-audio-activating" : "hero-whirlwind"}
-                src="/assets/logo/saci-whirlwind.png"
+                src="/assets/logo/saci-whirlwind.png?v=2"
                 alt=""
                 loading="eager"
                 decoding="async"
